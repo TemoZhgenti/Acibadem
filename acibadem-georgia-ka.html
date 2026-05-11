@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>აჯიბადემ საქართველო — ოფიციალური წარმომადგენლობა</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&family=Noto+Sans+Georgian:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #b8964a;
+    --gold-light: #d4ae6b;
+    --gold-pale: #f5eedc;
+    --navy: #0a1628;
+    --navy-mid: #112040;
+    --cream: #faf8f4;
+    --text-dark: #1a1a1a;
+    --text-mid: #4a4a4a;
+    --text-light: #8a8a8a;
+    --white: #ffffff;
+    --geo-red: #c8172b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', 'Noto Sans Georgian', sans-serif;
+    font-weight: 300;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  body { cursor: none; }
+  #cursor {
+    position: fixed; width: 10px; height: 10px;
+    border-radius: 50%; background: var(--gold);
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+  #cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border-radius: 50%; border: 1px solid var(--gold);
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, border-color 0.3s;
+    opacity: 0.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100; padding: 24px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,22,40,0.97);
+    padding: 16px 60px;
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo-wrap { display: flex; flex-direction: column; gap: 2px; }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300;
+    letter-spacing: 0.14em; color: var(--white);
+    text-decoration: none; line-height: 1;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-sub {
+    font-size: 8px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    transition: color 0.3s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute;
+    bottom: -4px; left: 0; width: 0; height: 1px;
+    background: var(--gold); transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-right { display: flex; align-items: center; gap: 20px; }
+  .nav-social { display: flex; gap: 14px; }
+  .nav-social a {
+    width: 32px; height: 32px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.3s, background 0.3s;
+    text-decoration: none;
+  }
+  .nav-social a:hover { border-color: var(--gold); background: rgba(184,150,74,0.15); }
+  .nav-social svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.7); transition: fill 0.3s; }
+  .nav-social a:hover svg { fill: var(--gold); }
+  .nav-cta {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid var(--gold);
+    padding: 9px 20px; text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: 100vh; min-height: 680px;
+    background: var(--navy);
+    display: flex; align-items: center; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #060e1e 0%, #0a1628 50%, #112040 100%);
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.035;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 70px, rgba(184,150,74,1) 70px, rgba(184,150,74,1) 71px),
+      repeating-linear-gradient(90deg, transparent, transparent 70px, rgba(184,150,74,1) 70px, rgba(184,150,74,1) 71px);
+  }
+  .hero-geo-flag {
+    position: absolute; right: 80px; top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.05; pointer-events: none;
+  }
+  .hero-geo-flag svg { width: 500px; height: 500px; }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px; max-width: 800px;
+    animation: fadeUp 1.2s ease both;
+  }
+  .hero-eyebrow {
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 36px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 5.5vw, 80px);
+    font-weight: 300; line-height: 1.07;
+    color: var(--white); margin-bottom: 28px;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-desc {
+    font-size: 13px; font-weight: 300;
+    line-height: 1.95; color: rgba(255,255,255,0.55);
+    max-width: 520px; margin-bottom: 48px;
+    letter-spacing: 0.02em;
+  }
+  .hero-actions { display: flex; gap: 18px; align-items: center; }
+  .btn-primary {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--gold); color: var(--navy);
+    padding: 15px 34px; text-decoration: none;
+    transition: background 0.3s, transform 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-ghost {
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: color 0.3s;
+  }
+  .btn-ghost:hover { color: var(--gold); }
+  .hero-badges {
+    position: absolute; bottom: 50px; right: 60px;
+    display: flex; gap: 40px; z-index: 2;
+    animation: fadeUp 1.4s 0.3s ease both;
+  }
+  .hero-badge { text-align: right; }
+  .hero-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 300;
+    color: var(--white); line-height: 1;
+  }
+  .hero-badge-num sup { font-size: 18px; color: var(--gold); }
+  .hero-badge-label {
+    font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+  }
+  .scroll-line-wrap {
+    position: absolute; bottom: 36px; left: 60px;
+    display: flex; align-items: center; gap: 12px; z-index: 2;
+  }
+  .scroll-line {
+    width: 1px; height: 56px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: pulse 2s infinite;
+  }
+  .scroll-txt {
+    font-size: 8px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+    writing-mode: vertical-rl;
+  }
+
+  /* ── WHAT WE DO ── */
+  .what-we-do {
+    padding: 130px 60px;
+    max-width: 1260px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 100px; align-items: center;
+  }
+  .eyebrow {
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.38em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 22px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .eyebrow::before {
+    content: ''; display: block;
+    width: 28px; height: 1px; background: var(--gold);
+  }
+  .sec-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.2vw, 50px);
+    font-weight: 300; line-height: 1.18;
+    color: var(--navy); margin-bottom: 26px;
+  }
+  .sec-title em { font-style: italic; color: var(--gold); }
+  .sec-text {
+    font-size: 13px; line-height: 1.95;
+    color: var(--text-mid); margin-bottom: 18px;
+  }
+  .services-list { list-style: none; margin-top: 32px; }
+  .services-list li {
+    display: flex; align-items: flex-start;
+    gap: 14px; padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    font-size: 13px; color: var(--text-mid);
+    transition: color 0.3s;
+  }
+  .services-list li:hover { color: var(--navy); }
+  .services-list li::before {
+    content: '';
+    display: block; flex-shrink: 0;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold); margin-top: 7px;
+  }
+  .what-right { position: relative; }
+  .steps-wrap {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .step {
+    display: flex; gap: 24px; padding: 28px 30px;
+    border: 1px solid rgba(184,150,74,0.12);
+    border-bottom: none;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .step:last-child { border-bottom: 1px solid rgba(184,150,74,0.12); }
+  .step:hover { background: rgba(184,150,74,0.04); }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 300;
+    color: var(--gold); opacity: 0.4;
+    line-height: 1; flex-shrink: 0; width: 36px;
+  }
+  .step-body {}
+  .step-title {
+    font-size: 13px; font-weight: 500;
+    color: var(--navy); margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .step-desc {
+    font-size: 12px; line-height: 1.8;
+    color: var(--text-light);
+  }
+
+  /* ── ABOUT ACIBADEM (short) ── */
+  .about-acib {
+    background: var(--navy);
+    padding: 100px 60px;
+    position: relative; overflow: hidden;
+  }
+  .about-acib::before {
+    content: '';
+    position: absolute; top: -150px; right: -150px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(184,150,74,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-acib-inner {
+    max-width: 1260px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 80px; align-items: center;
+  }
+  .about-acib-left { }
+  .about-acib-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.2vw, 50px);
+    font-weight: 300; line-height: 1.15;
+    color: var(--white);
+  }
+  .about-acib-title em { font-style: italic; color: var(--gold-light); }
+  .about-acib-right {}
+  .about-acib-text {
+    font-size: 13px; line-height: 1.95;
+    color: rgba(255,255,255,0.55); margin-bottom: 16px;
+  }
+  .acib-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 48px;
+    border: 1px solid rgba(184,150,74,0.15);
+  }
+  .acib-stat {
+    padding: 30px 24px;
+    border-right: 1px solid rgba(184,150,74,0.15);
+    text-align: center;
+  }
+  .acib-stat:last-child { border-right: none; }
+  .acib-stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 300;
+    color: var(--white); line-height: 1;
+  }
+  .acib-stat-n sup { font-size: 20px; color: var(--gold); }
+  .acib-stat-l {
+    font-size: 9px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    margin-top: 8px;
+  }
+
+  /* ── OFFICES ── */
+  .offices { padding: 120px 60px; }
+  .offices-inner { max-width: 1260px; margin: 0 auto; }
+  .offices-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 60px;
+  }
+  .offices-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .office-card {
+    border: 1px solid rgba(10,22,40,0.1);
+    background: var(--white);
+    overflow: hidden;
+    transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+    position: relative;
+  }
+  .office-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(10,22,40,0.1);
+    border-color: rgba(184,150,74,0.3);
+  }
+  .office-top {
+    background: var(--navy-mid);
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .office-top::before {
+    content: '';
+    position: absolute;
+    bottom: -30px; right: -30px;
+    width: 120px; height: 120px; border-radius: 50%;
+    border: 1px solid rgba(184,150,74,0.15);
+  }
+  .office-top::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -60px;
+    width: 180px; height: 180px; border-radius: 50%;
+    border: 1px solid rgba(184,150,74,0.08);
+  }
+  .office-city-geo {
+    font-size: 28px; margin-bottom: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.05em;
+  }
+  .office-city {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px; font-weight: 300;
+    color: var(--white); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .office-region {
+    font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .office-body { padding: 32px 36px; }
+  .office-info { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .office-info li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 12px; color: var(--text-mid); line-height: 1.6;
+  }
+  .office-info-icon {
+    width: 18px; height: 18px; flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .office-info-icon svg {
+    width: 18px; height: 18px;
+    stroke: var(--gold); fill: none; stroke-width: 1.4;
+  }
+  .office-actions {
+    padding: 0 36px 32px;
+    display: flex; gap: 10px;
+  }
+  .office-btn {
+    flex: 1; text-align: center;
+    font-size: 9px; font-weight: 400;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 11px 8px; text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .office-btn-call {
+    background: var(--navy); color: var(--white);
+  }
+  .office-btn-call:hover { background: var(--navy-mid); }
+  .office-btn-wa {
+    background: #25D366; color: var(--white);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .office-btn-wa:hover { background: #20ba5a; }
+  .office-btn-wa svg { width: 13px; height: 13px; fill: var(--white); }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    background: var(--gold-pale);
+    padding: 100px 60px;
+  }
+  .how-inner { max-width: 1260px; margin: 0 auto; }
+  .how-header { text-align: center; margin-bottom: 70px; }
+  .how-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.2vw, 50px);
+    font-weight: 300; color: var(--navy); margin-top: 16px;
+  }
+  .how-title em { font-style: italic; color: var(--gold); }
+  .how-steps {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; position: relative;
+  }
+  .how-steps::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .how-step { text-align: center; padding: 0 20px; }
+  .how-step-circle {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--white); border: 1px solid rgba(184,150,74,0.35);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    position: relative; z-index: 1;
+  }
+  .how-step-circle svg {
+    width: 28px; height: 28px;
+    stroke: var(--gold); fill: none; stroke-width: 1.3;
+  }
+  .how-step-num {
+    position: absolute; top: -6px; right: -6px;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--gold); color: var(--navy);
+    font-size: 9px; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .how-step-name {
+    font-size: 12px; font-weight: 500;
+    color: var(--navy); margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .how-step-desc {
+    font-size: 11px; line-height: 1.75;
+    color: var(--text-light);
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    padding: 100px 60px;
+    text-align: center;
+  }
+  .testimonials-inner { max-width: 780px; margin: 0 auto; }
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 100px; color: var(--gold); opacity: 0.2;
+    line-height: 0.6; margin-bottom: 36px; display: block;
+  }
+  .test-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-weight: 300; font-style: italic;
+    line-height: 1.55; color: var(--navy); margin-bottom: 36px;
+  }
+  .test-author {
+    font-size: 10px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  .test-role { font-size: 11px; color: var(--text-light); margin-top: 5px; }
+  .dots { display: flex; justify-content: center; gap: 9px; margin-top: 40px; }
+  .dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold); opacity: 0.3; cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .dot.active { opacity: 1; transform: scale(1.5); }
+
+  /* ── CONTACT / CTA ── */
+  .contact-cta {
+    background: var(--navy);
+    padding: 100px 60px;
+    position: relative; overflow: hidden;
+  }
+  .contact-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(184,150,74,0.025) 60px, rgba(184,150,74,0.025) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(184,150,74,0.025) 60px, rgba(184,150,74,0.025) 61px);
+    pointer-events: none;
+  }
+  .contact-inner {
+    max-width: 1260px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .contact-left {}
+  .contact-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(34px, 3.2vw, 50px);
+    font-weight: 300; line-height: 1.15;
+    color: var(--white); margin-top: 16px; margin-bottom: 20px;
+  }
+  .contact-title em { font-style: italic; color: var(--gold-light); }
+  .contact-desc {
+    font-size: 13px; line-height: 1.9;
+    color: rgba(255,255,255,0.45); margin-bottom: 36px;
+  }
+  .contact-socials {
+    display: flex; gap: 14px; margin-top: 8px;
+  }
+  .csoc {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 20px; border: 1px solid rgba(255,255,255,0.1);
+    text-decoration: none; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .csoc svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .csoc-fb { color: #a0b4ff; }
+  .csoc-fb:hover { border-color: #1877f2; background: rgba(24,119,242,0.1); }
+  .csoc-fb svg { fill: #1877f2; }
+  .csoc-ig { color: #ffb8d4; }
+  .csoc-ig:hover { border-color: #e1306c; background: rgba(225,48,108,0.1); }
+  .csoc-ig svg { fill: #e1306c; }
+  .csoc-wa { color: #a0f0c0; }
+  .csoc-wa:hover { border-color: #25d366; background: rgba(37,211,102,0.1); }
+  .csoc-wa svg { fill: #25d366; }
+  .contact-form-wrap {}
+  .cform {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .cform input, .cform select, .cform textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 15px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px; font-weight: 300;
+    letter-spacing: 0.04em; color: var(--white);
+    outline: none; transition: border-color 0.3s;
+    cursor: none;
+    resize: none;
+  }
+  .cform input::placeholder, .cform textarea::placeholder { color: rgba(255,255,255,0.28); }
+  .cform input:focus, .cform select:focus, .cform textarea:focus { border-color: var(--gold); }
+  .cform select { color: rgba(255,255,255,0.35); }
+  .cform select option { background: var(--navy); color: var(--white); }
+  .cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .cform-submit {
+    background: var(--gold); border: none;
+    padding: 16px; font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 400;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--navy); cursor: none;
+    transition: background 0.3s;
+  }
+  .cform-submit:hover { background: var(--gold-light); }
+
+  /* ── FOOTER ── */
+  footer { background: #060e1d; padding: 70px 60px 36px; }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px; padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 36px;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 300;
+    color: var(--white); letter-spacing: 0.1em; margin-bottom: 4px;
+  }
+  .footer-brand span { color: var(--gold); }
+  .footer-brand-sub {
+    font-size: 8px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+    margin-bottom: 18px;
+  }
+  .footer-tagline {
+    font-size: 12px; line-height: 1.8;
+    color: rgba(255,255,255,0.3); max-width: 260px; margin-bottom: 28px;
+  }
+  .footer-socials { display: flex; gap: 12px; }
+  .footer-soc {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.12);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; transition: border-color 0.3s, background 0.3s;
+  }
+  .footer-soc:hover { border-color: var(--gold); }
+  .footer-soc svg { width: 16px; height: 16px; }
+  .footer-soc-fb svg { fill: #1877f2; }
+  .footer-soc-ig svg { fill: #e1306c; }
+  .footer-soc-wa svg { fill: #25d366; }
+  .footer-col-title {
+    font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 22px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 11px; }
+  .footer-links a {
+    font-size: 12px; color: rgba(255,255,255,0.35);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: rgba(255,255,255,0.75); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a {
+    font-size: 10px; color: rgba(255,255,255,0.2);
+    text-decoration: none; letter-spacing: 0.05em;
+    transition: color 0.3s;
+  }
+  .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25d366;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; z-index: 500;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .wa-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+  }
+  .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+  /* ── UTILS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+
+  @media (max-width: 960px) {
+    nav { padding: 18px 20px; }
+    nav.scrolled { padding: 14px 20px; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 20px; }
+    .hero-badges { right: 20px; gap: 20px; bottom: 30px; }
+    .scroll-line-wrap { left: 20px; }
+    .what-we-do { grid-template-columns: 1fr; padding: 70px 20px; gap: 50px; }
+    .about-acib { padding: 70px 20px; }
+    .about-acib-inner { grid-template-columns: 1fr; gap: 40px; }
+    .acib-stats { grid-template-columns: 1fr 1fr; }
+    .acib-stat:nth-child(2) { border-right: none; }
+    .acib-stat:nth-child(3) { border-top: 1px solid rgba(184,150,74,0.15); }
+    .offices { padding: 70px 20px; }
+    .offices-grid { grid-template-columns: 1fr; }
+    .how { padding: 70px 20px; }
+    .how-steps { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .how-steps::before { display: none; }
+    .how-step:last-child { grid-column: span 2; }
+    .testimonials { padding: 70px 20px; }
+    .contact-cta { padding: 70px 20px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 50px; }
+    .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 50px 20px 28px; }
+    .cform-row { grid-template-columns: 1fr; }
+    body { cursor: auto; }
+    #cursor, #cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- WhatsApp Float Button -->
+<a class="wa-float" href="https://wa.me/995XXXXXXXXX" target="_blank" title="WhatsApp-ზე დაწერე">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo-wrap" style="text-decoration:none;">
+    <div class="nav-logo">ACIBA<span>DEM</span></div>
+    <div class="nav-sub">ოფიციალური წარმომადგენელი · საქართველო</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#what-we-do">ჩვენი სერვისები</a></li>
+    <li><a href="#about">აჯიბადემის შესახებ</a></li>
+    <li><a href="#offices">ჩვენი ოფისები</a></li>
+    <li><a href="#contact">კონტაქტი</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://facebook.com" target="_blank" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" title="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2" stroke="white" fill="none"/></svg>
+      </a>
+      <a href="https://wa.me/995XXXXXXXXX" target="_blank" title="WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
+    <a href="#contact" class="nav-cta">უფასო კონსულტაცია</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <!-- Georgian cross flag watermark -->
+  <div class="hero-geo-flag">
+    <svg viewBox="0 0 500 500" fill="none">
+      <rect width="500" height="500" fill="none"/>
+      <rect x="220" y="0" width="60" height="500" fill="white"/>
+      <rect x="0" y="220" width="500" height="60" fill="white"/>
+      <rect x="20" y="20" width="80" height="80" fill="white"/>
+      <rect x="400" y="20" width="80" height="80" fill="white"/>
+      <rect x="20" y="400" width="80" height="80" fill="white"/>
+      <rect x="400" y="400" width="80" height="80" fill="white"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">ოფიციალური წარმომადგენლობა · საქართველო 🇬🇪</div>
+    <h1 class="hero-title">თქვენი კარი<br><em>მსოფლიო დონის</em><br>სამედიცინო დახმარებამდე</h1>
+    <p class="hero-desc">ჩვენ ვართ Acibadem Healthcare Group-ის ოფიციალური წარმომადგენელი საქართველოში — ვეხმარებით თბილისის, ქუთაისის და ბათუმის პაციენტებს ევროპის ერთ-ერთ ყველაზე პრესტიჟულ სამედიცინო ქსელთან წვდომაში, მათ საკუთარ ენაზე, საკუთარი ქალაქიდან.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">უფასო კონსულტაცია</a>
+      <a href="#what-we-do" class="btn-ghost">
+        How it works
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <div class="hero-badge">
+      <div class="hero-badge-num">100<sup>%</sup></div>
+      <div class="hero-badge-label">უფასო სერვისი</div>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-num">3</div>
+      <div class="hero-badge-label">ქალაქი საქართველოში</div>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-num">24<sup>/7</sup></div>
+      <div class="hero-badge-label">მხარდაჭერა</div>
+    </div>
+  </div>
+  <div class="scroll-line-wrap">
+    <div class="scroll-line"></div>
+    <div class="scroll-txt">გადაახვიე</div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="what-we-do" id="what-we-do">
+  <div class="reveal">
+    <div class="eyebrow">ჩვენი როლი</div>
+    <h2 class="sec-title">ჩვენ გაგაცნობთ<br><em>Acibadem</em>-ს</h2>
+    <p class="sec-text">როგორც Acibadem Healthcare Group-ის ოფიციალური წარმომადგენლობა საქართველოში, ჩვენი მიზანია: ქართველ პაციენტებს გავუმარტივოთ წვდომა თურქეთში მსოფლიო დონის სამედიცინო დახმარებამდე — მარტივად და სტრესსგარეშე.</p>
+    <p class="sec-text">ჩვენ გთავაზობთ სრულ, ბოლომდე მიმდინარე მხარდაჭერას — სრულიად უფასოდ. პირველი შეკითხვიდან სახლში უსაფრთხო დაბრუნებამდე, ჩვენ თქვენთან ვართ გზის ყოველ ნაბიჯზე.</p>
+    <ul class="services-list">
+      <li>უფასო სამედიცინო კონსულტაცია და Acibadem სპეციალისტების მეორე მოსაზრება</li>
+      <li>სამედიცინო დოკუმენტების თარგმანი და მომზადება</li>
+      <li>ვიზიტის დანიშვნა და მკურნალობის დაგეგმვა</li>
+      <li>ავიაბილეთებისა და სასტუმროს დახმარება სტამბულში ან ანკარაში</li>
+      <li>ქართულენოვანი თარჯიმანი მკურნალობის მთელი პერიოდის განმავლობაში</li>
+      <li>მკურნალობის შემდგომი მეთვალყურეობა საქართველოში</li>
+      <li>დაზღვევისა და გადახდის კონსულტაცია</li>
+    </ul>
+  </div>
+  <div class="reveal reveal-d1">
+    <div class="steps-wrap">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-title">პირველადი კონსულტაცია</div>
+          <div class="step-desc">გვიკავშირდებით — ტელეფონით, WhatsApp-ით ან ოფისში მოსვლით. ვუსმენთ თქვენს მდგომარეობას და განვმარტავთ ვარიანტებს, სრულიად უფასოდ და ვალდებულებების გარეშე.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-title">სამედიცინო ფაილის განხილვა</div>
+          <div class="step-desc">თქვენს სამედიცინო დოკუმენტებს ვაგზავნით Acibadem-ის შესაბამის სპეციალისტებთან, რომლებიც განიხილავენ საქმეს და წარმოადგენენ მკურნალობის გეგმას და ღირებულების შეფასებას.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-title">მგზავრობის დაგეგმვა</div>
+          <div class="step-desc">ვაკოორდინირებთ ვიზიტის თარიღებს, ვეხმარებით ბილეთებთან, სასტუმროსთან და ვიზასთან საჭიროების შემთხვევაში — რომ თქვენ ჯანმრთელობაზე ფიქრობდეთ, ლოჯისტიკაზე არა.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-title">მკურნალობა თურქეთში</div>
+          <div class="step-desc">მიიღებთ მსოფლიო დონის მკურნალობას Acibadem-ში, ქართულენოვანი კოორდინატორის თანხლებით სტაციონარული ყოფნის მთელი პერიოდის განმავლობაში.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <div class="step-title">მეთვალყურეობა სახლში</div>
+          <div class="step-desc">საქართველოში დაბრუნების შემდეგ, ვრჩებით კავშირში — ვაკოორდინირებთ შემდგომ მოვლას, ანალიზების შედეგებს და კომუნიკაციას Acibadem-ის ექიმებთან.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT ACIBADEM -->
+<section class="about-acib" id="about">
+  <div class="about-acib-inner">
+    <div class="reveal">
+      <div class="eyebrow" style="color:var(--gold-light);">საავადმყოფოს შესახებ</div>
+      <h2 class="about-acib-title">Acibadem<br><em>Healthcare</em><br>Group</h2>
+    </div>
+    <div class="reveal reveal-d1">
+      <p class="about-acib-text">1991 წელს სტამბულში დაარსებული, Acibadem Healthcare Group გაიზარდა ევროპასა და ახლო აღმოსავლეთში ერთ-ერთ ყველაზე დიდ და პატივცემულ სამედიცინო ქსელად. 9 ქვეყანაში 30-ზე მეტი საავადმყოფოთი, Acibadem აერთიანებს უახლეს სამედიცინო ტექნოლოგიებს გულისხმიერ, პაციენტზე ორიენტირებულ მოვლასთან.</p>
+      <p class="about-acib-text">Acibadem-ის საავადმყოფოები საერთაშორისოდ აკრედიტებულია JCI (Joint Commission International)-ის მიერ — სამედიცინო ხარისხისა და უსაფრთხოების მსოფლიო ოქროს სტანდარტი. ყველა განყოფილებაში მუშაობენ საერთაშორისო კვალიფიკაციის ექიმები, რომელთა მრავალი ევროპასა და ამერიკის შეერთებულ შტატებში სწავლობდა ან პრაქტიკას ეწეოდა.</p>
+      <p class="about-acib-text">ძირითადი სპეციალობებია: ონკოლოგია და კიბოს ქირურგია, კარდიოლოგია და სისხლძარღვთა ქირურგია, ნევროლოგია და ნეიროქირურგია, ორგანოთა გადანერგვა, ორთოპედია და ხერხემლის ქირურგია, რეპროდუქციული მედიცინა და IVF, ასევე ყოვლისმომცველი ჯანმრთელობის შემოწმება. მთელი მსოფლიოდან პაციენტები მგზავრობენ Acibadem-ში სამკურნალოდ — ჩვენ ამ გზას ქართველებისთვის ვამარტივებთ.</p>
+      <div class="acib-stats">
+        <div class="acib-stat">
+          <div class="acib-stat-n">30<sup>+</sup></div>
+          <div class="acib-stat-l">საავადმყოფო</div>
+        </div>
+        <div class="acib-stat">
+          <div class="acib-stat-n">9</div>
+          <div class="acib-stat-l">ქვეყანა</div>
+        </div>
+        <div class="acib-stat">
+          <div class="acib-stat-n">10k<sup>+</sup></div>
+          <div class="acib-stat-l">ექიმი</div>
+        </div>
+        <div class="acib-stat">
+          <div class="acib-stat-n">33</div>
+          <div class="acib-stat-l">წელი</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <div class="how-header reveal">
+      <div class="eyebrow" style="justify-content:center;">პროცესი</div>
+      <h2 class="how-title">მარტივი ნაბიჯები<br><em>მსოფლიო დონის</em> მოვლამდე</h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-step reveal">
+        <div class="how-step-circle">
+          <span class="how-step-num">1</span>
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="how-step-name">დაგვიკავშირდით</div>
+        <div class="how-step-desc">დარეკეთ, WhatsApp-ი ან ეწვიეთ ჩვენს ერთ-ერთ სამ ოფისს საქართველოში.</div>
+      </div>
+      <div class="how-step reveal reveal-d1">
+        <div class="how-step-circle">
+          <span class="how-step-num">2</span>
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="how-step-name">დოკუმენტების გაგზავნა</div>
+        <div class="how-step-desc">ვთარგმნით და ვაგზავნით თქვენს სამედიცინო ფაილებს Acibadem-ის სპეციალისტებთან.</div>
+      </div>
+      <div class="how-step reveal reveal-d2">
+        <div class="how-step-circle">
+          <span class="how-step-num">3</span>
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="how-step-name">გეგმის მიღება</div>
+        <div class="how-step-desc">მიიღეთ მკურნალობის გეგმა და ღირებულების შეფასება Acibadem-ის ექიმებისგან.</div>
+      </div>
+      <div class="how-step reveal reveal-d1">
+        <div class="how-step-circle">
+          <span class="how-step-num">4</span>
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="how-step-name">მგზავრობის მოწყობა</div>
+        <div class="how-step-desc">ვაკოორდინირებთ ბილეთებს, სასტუმროს და ტრანსფერს სტამბულში ან ანკარაში.</div>
+      </div>
+      <div class="how-step reveal reveal-d2">
+        <div class="how-step-circle">
+          <span class="how-step-num">5</span>
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="how-step-name">მკურნალობა და სახლი</div>
+        <div class="how-step-desc">მსოფლიო დონის მოვლა, შემდეგ სახლში დაბრუნება სრული მხარდაჭერით.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICES -->
+<section class="offices" id="offices">
+  <div class="offices-inner">
+    <div class="offices-header reveal">
+      <div>
+        <div class="eyebrow">მოგვიძებნეთ</div>
+        <h2 class="sec-title">ჩვენი ოფისები<br>in <em>Georgia</em></h2>
+      </div>
+      <a href="#contact" class="btn-primary">ვიზიტის დაჯავშნა</a>
+    </div>
+    <div class="offices-grid">
+
+      <!-- Tbilisi -->
+      <div class="office-card reveal">
+        <div class="office-top">
+          <div class="office-city-geo">თბილისი</div>
+          <div class="office-city">Tbilisi</div>
+          <div class="office-region">დედაქალაქის ოფისი · მთავარი ოფისი</div>
+        </div>
+        <div class="office-body">
+          <ul class="office-info">
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              123 რუსთაველის გამზირი, თბილისი 0108, საქართველო
+            </li>
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              +995 32 XXX XX XX
+            </li>
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              ორშ–პარ: 09:00 – 18:00 · შაბ: 10:00 – 14:00
+            </li>
+          </ul>
+        </div>
+        <div class="office-actions">
+          <a href="tel:+99532XXXXXXX" class="office-btn office-btn-call">დარეკვა</a>
+          <a href="https://wa.me/995XXXXXXXXX" target="_blank" class="office-btn office-btn-wa">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Kutaisi -->
+      <div class="office-card reveal reveal-d1">
+        <div class="office-top" style="background:#0e2240;">
+          <div class="office-city-geo">ქუთაისი</div>
+          <div class="office-city">Kutaisi</div>
+          <div class="office-region">დასავლეთ საქართველოს ოფისი</div>
+        </div>
+        <div class="office-body">
+          <ul class="office-info">
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              45 დავით აღმაშენებლის ქ., ქუთაისი 4600, საქართველო
+            </li>
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              +995 31 XXX XX XX
+            </li>
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              ორშ–პარ: 09:00 – 18:00 · შაბ: 10:00 – 14:00
+            </li>
+          </ul>
+        </div>
+        <div class="office-actions">
+          <a href="tel:+99531XXXXXXX" class="office-btn office-btn-call">დარეკვა</a>
+          <a href="https://wa.me/995XXXXXXXXX" target="_blank" class="office-btn office-btn-wa">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Batumi -->
+      <div class="office-card reveal reveal-d2">
+        <div class="office-top" style="background:#0c1f3a;">
+          <div class="office-city-geo">ბათუმი</div>
+          <div class="office-city">Batumi</div>
+          <div class="office-region">აჭარის რეგიონული ოფისი</div>
+        </div>
+        <div class="office-body">
+          <ul class="office-info">
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              12 ნინოშვილის ქ., ბათუმი 6010, საქართველო
+            </li>
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              +995 42 XXX XX XX
+            </li>
+            <li>
+              <div class="office-info-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              ორშ–პარ: 09:00 – 18:00 · შაბ: 10:00 – 14:00
+            </li>
+          </ul>
+        </div>
+        <div class="office-actions">
+          <a href="tel:+99542XXXXXXX" class="office-btn office-btn-call">დარეკვა</a>
+          <a href="https://wa.me/995XXXXXXXXX" target="_blank" class="office-btn office-btn-wa">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <span class="quote-mark">"</span>
+    <div id="test-text" class="test-text">გამიკეთეს გულის დაავადების დიაგნოზი და არ ვიცოდი სად მიმეკითხა. Acibadem საქართველომ ყველაფერი მოაგვარა — ჩემი დოკუმენტების თარგმანიდან სტამბულში სასტუმროს დაჯავშნამდე. ოპერაცია წარმატებული იყო და ყოველ წუთს მხარდაჭერილი ვგრძნობდი თავს.</div>
+    <div id="test-author" class="test-author">გიორგი ბერიძე</div>
+    <div id="test-role" class="test-role">გულის ქირურგიის პაციენტი · თბილისი</div>
+    <div class="dots">
+      <div class="dot active" onclick="goTo(0)"></div>
+      <div class="dot" onclick="goTo(1)"></div>
+      <div class="dot" onclick="goTo(2)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="contact-cta" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="eyebrow" style="color:var(--gold);">დაგვიკავშირდით</div>
+      <h2 class="contact-title">დაიწყეთ<br><em>გზა</em> დღეს</h2>
+      <p class="contact-desc">ჩვენი გუნდი მზადაა უპასუხოს თქვენს კითხვებს, განიხილოს თქვენი სამედიცინო მდგომარეობა და დაეხმაროს საუკეთესო დახმარებამდე წვდომაში — სრულიად უფასოდ. დაგვიკავშირდით ქართულად, რუსულად ან ინგლისურად.</p>
+      <p style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:14px;">გამოგვყვეთ და მოგვწერეთ პირდაპირ</p>
+      <div class="contact-socials">
+        <a href="https://facebook.com" target="_blank" class="csoc csoc-fb">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
+        <a href="https://instagram.com" target="_blank" class="csoc csoc-ig">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="#e1306c" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a href="https://wa.me/995571014521" target="_blank" class="csoc csoc-wa">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="reveal reveal-d1">
+      <div class="cform">
+        <div class="cform-row">
+          <input type="text" placeholder="სახელი და გვარი">
+          <input type="tel" placeholder="ტელეფონი / WhatsApp">
+        </div>
+        <input type="email" placeholder="ელ-ფოსტა (სურვილისამებრ)">
+        <select>
+          <option value="" disabled selected>უახლოესი ოფისი</option>
+          <option>Tbilisi</option>
+          <option>Kutaisi</option>
+          <option>Batumi</option>
+        </select>
+        <select>
+          <option value="" disabled selected>სამედიცინო მიმართულება</option>
+          <option>ონკოლოგია და კიბოს მკურნალობა</option>
+          <option>კარდიოლოგია და გულის ქირურგია</option>
+          <option>ნევროლოგია და ტვინის ქირურგია</option>
+          <option>ორთოპედია და ხერხემალი</option>
+          <option>ორგანოთა გადანერგვა</option>
+          <option>რეპროდუქციული მედიცინა / IVF</option>
+          <option>ზოგადი ჯანმრთელობის შემოწმება</option>
+          <option>სხვა / ჯერ არ ვიცი</option>
+        </select>
+        <textarea rows="3" placeholder="მოკლედ აღწერეთ თქვენი მდგომარეობა (სურვილისამებრ)"></textarea>
+        <button class="cform-submit" onclick="alert('გმადლობთ! გამოგიკავშირდებით რამდენიმე საათში.')">შეტყობინების გაგზავნა — უფასოა</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">ACIBA<span>DEM</span></div>
+      <div class="footer-brand-sub">ოფიციალური წარმომადგენელი · საქართველო</div>
+      <p class="footer-tagline">ვაკავშირებთ ქართველ პაციენტებს თურქეთის მსოფლიო დონის სამედიცინო დახმარებასთან — ოფისებით თბილისში, ქუთაისსა და ბათუმში.</p>
+      <div class="footer-socials">
+        <a href="https://facebook.com" target="_blank" class="footer-soc footer-soc-fb" title="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="footer-soc footer-soc-ig" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#e1306c" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="#e1306c" stroke="none"/></svg>
+        </a>
+        <a href="https://wa.me/995571014521" target="_blank" class="footer-soc footer-soc-wa" title="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">ოფისები</div>
+      <ul class="footer-links">
+        <li><a href="#offices">თბილისი — რუსთაველის გამზ.</a></li>
+        <li><a href="#offices">ქუთაისი — დავით აღმაშენებლის ქ.</a></li>
+        <li><a href="#offices">ბათუმი — ნინოშვილის ქ.</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">სერვისები</div>
+      <ul class="footer-links">
+        <li><a href="#what-we-do">უფასო კონსულტაცია</a></li>
+        <li><a href="#what-we-do">სამედიცინო ფაილის განხილვა</a></li>
+        <li><a href="#what-we-do">მგზავრობის დახმარება</a></li>
+        <li><a href="#what-we-do">თარჯიმანი</a></li>
+        <li><a href="#what-we-do">შემდგომი მოვლა</a></li>
+        <li><a href="#about">აჯიბადემის შესახებ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Acibadem Georgia წარმომადგენლობა. ყველა უფლება დაცულია.</div>
+    <div class="footer-legal">
+      <a href="#">კონფიდენციალურობის პოლიტიკა</a>
+      <a href="#">პირობები</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function tick(){
+    rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+    cur.style.left=mx+'px'; cur.style.top=my+'px';
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a,button,.dot,.office-card,.step,.pillar').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='56px';ring.style.height='56px';ring.style.borderColor='rgba(184,150,74,0.5)';cur.style.transform='translate(-50%,-50%) scale(0.5)';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.borderColor='rgba(184,150,74,0.7)';cur.style.transform='translate(-50%,-50%) scale(1)';});
+  });
+
+  // Scrolled nav
+  window.addEventListener('scroll',()=>{
+    document.getElementById('nav').classList.toggle('scrolled',window.scrollY>70);
+  });
+
+  // Reveal
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+  // Testimonials
+  const tests=[
+    {text:"გამიკეთეს გულის დაავადების დიაგნოზი და არ ვიცოდი სად მიმეკითხა. Acibadem საქართველომ ყველაფერი მოაგვარა — ჩემი დოკუმენტების თარგმანიდან სტამბულში სასტუმროს დაჯავშნამდე. ოპერაცია წარმატებული იყო და ყოველ წუთს მხარდაჭერილი ვგრძნობდი თავს.",author:"Giorgi Beridze",role:"გულის ქირურგიის პაციენტი · თბილისი"},
+    {text:"საქართველოში წლების განმავლობაში წარუმატებელი IVF მცდელობების შემდეგ, მეგობარმა Acibadem გვირჩია. ქუთაისის გუნდმა ყველაფერი უხარვეზოდ მოაგვარა. ახლა გვყავს ლამაზი ქალიშვილი. სამუდამოდ მადლიერნი ვართ.",author:"Tamar & Levan Khachidze",role:"IVF პაციენტები · ქუთაისი"},
+    {text:"ჩემს დედას Acibadem სტამბულში კიბოს რთული ოპერაცია ჩაუტარდა. ბათუმის ოფისის გუნდი გვერდით გვედგა ყოველ ნაბიჯზე — მანამდე, განმავლობაში და შემდეგ. კვირების შემდეგ კიდევ დაგვირეკეს გამოჯანმრთელების შესამოწმებლად. ნამდვილად განსაკუთრებული.",author:"Nino Jokhadze",role:"ონკოლოგიური პაციენტის ოჯახი · ბათუმი"}
+  ];
+  let cur2=0;
+  function goTo(i){
+    cur2=i;
+    const el=document.getElementById('test-text');
+    el.style.opacity='0';
+    setTimeout(()=>{
+      el.textContent=tests[i].text;
+      document.getElementById('test-author').textContent=tests[i].author;
+      document.getElementById('test-role').textContent=tests[i].role;
+      el.style.opacity='1';
+    },280);
+    document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+  }
+  document.getElementById('test-text').style.transition='opacity 0.28s';
+  setInterval(()=>goTo((cur2+1)%3),5500);
+</script>
+</body>
+</html>
